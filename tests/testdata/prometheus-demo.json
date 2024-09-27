@@ -1,0 +1,16 @@
+{
+    "kind": "Datasource",
+    "metadata": {
+      "name": "PrometheusDemo",
+      "project": "perses"
+    },
+    "spec": {
+      "default": true,
+      "plugin": {
+        "kind": "PrometheusDatasource",
+        "spec": {
+          "directUrl": "https://prometheus.demo.do.prometheus.io"
+        }
+      }
+    }
+  }

@@ -2,12 +2,12 @@ from typing import Annotated, Literal, Optional, Union
 
 from pydantic import Field
 
-from perses.model.common import BaseModel, DatasourceRef
+from perses.model.common import BaseModel, DatasourceSelector
 
 
 class PrometheusTimeSeriesQuerySpec(BaseModel):
     query: str
-    datasource: Optional[DatasourceRef] = None
+    datasource: Optional[DatasourceSelector] = None
     series_name_format: Optional[str] = None
     min_step: Optional[str] = None
     resolution: Optional[int] = None
@@ -32,7 +32,7 @@ class TimeSeriesQuery(BaseModel):
 
 class TempoTraceQuerySpec(BaseModel):
     query: str
-    datasource: Optional[DatasourceRef] = None
+    datasource: Optional[DatasourceSelector] = None
 
 
 class TempoTraceQuery(BaseModel):

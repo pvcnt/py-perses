@@ -1,6 +1,6 @@
 from datetime import datetime
 from enum import StrEnum, unique
-from typing import Optional
+from typing import Literal, Optional
 
 from pydantic import BaseModel as _BaseModel
 from pydantic import ConfigDict, Field
@@ -11,13 +11,39 @@ class BaseModel(_BaseModel):
     model_config = ConfigDict(extra="forbid", alias_generator=to_camel, populate_by_name=True)
 
 
-class DatasourceRef(BaseModel):
+class DatasourceSelector(BaseModel):
     kind: str
     name: Optional[str] = None
 
 
 class JSONRef(BaseModel):
     ref: str = Field(alias="$ref")
+
+
+@unique
+class HTTPMethod(StrEnum):
+    post = "POST"
+    put = "PUT"
+    patch = "PATCH"
+    get = "GET"
+    delete = "DELETE"
+
+
+class HTTPAllowedEndpoint(BaseModel):
+    endpoint_pattern: str
+    method: HTTPMethod
+
+
+class HTTPProxySpec(BaseModel):
+    url: str
+    allowed_endpoints: list[HTTPAllowedEndpoint] = Field(default_factory=list)
+    headers: dict[str, str] = Field(default_factory=dict)
+    secret: Optional[str] = None
+
+
+class HTTPProxy(BaseModel):
+    kind: Literal["HTTPProxy"] = "HTTPProxy"
+    spec: HTTPProxySpec
 
 
 class ObjectMetadata(BaseModel):

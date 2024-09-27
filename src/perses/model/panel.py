@@ -86,11 +86,11 @@ class Palette(BaseModel):
 
 class Visual(BaseModel):
     display: Optional[VisualDisplay] = None
-    line_width: Optional[Annotated[float, Field(gte=0.25, lte=3)]] = None
-    area_opacity: Optional[Annotated[float, Field(gte=0, lte=1)]] = None
+    line_width: Optional[Annotated[float, Field(ge=0.25, le=3)]] = None
+    area_opacity: Optional[Annotated[float, Field(ge=0, le=1)]] = None
     show_points: VisualShowPoints = VisualShowPoints.auto
     palette: Palette = Field(default_factory=Palette)
-    point_radius: Optional[Annotated[float, Field(gte=0, lte=6)]] = None
+    point_radius: Optional[Annotated[float, Field(ge=0, le=6)]] = None
     stack: Optional[VisualStack] = None
     connect_nulls: bool = False
 

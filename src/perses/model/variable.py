@@ -3,7 +3,7 @@ from typing import Annotated, Literal, Optional, Union
 
 from pydantic import Field
 
-from perses.model.common import BaseModel, DatasourceRef, Display, ObjectMetadata
+from perses.model.common import BaseModel, DatasourceSelector, Display, ObjectMetadata
 
 
 class TextVariableSpec(BaseModel):
@@ -44,7 +44,7 @@ class StaticListVariable(BaseModel):
 
 
 class PrometheusLabelNamesVariableSpec(BaseModel):
-    datasource: Optional[DatasourceRef] = None
+    datasource: Optional[DatasourceSelector] = None
     matchers: list[str] = Field(default_factory=list)
 
 
@@ -55,7 +55,7 @@ class PrometheusLabelNamesVariable(BaseModel):
 
 class PrometheusLabelValuesVariableSpec(BaseModel):
     label_name: str
-    datasource: Optional[DatasourceRef] = None
+    datasource: Optional[DatasourceSelector] = None
     matchers: list[str] = Field(default_factory=list)
 
 
